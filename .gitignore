@@ -1,0 +1,8 @@
+### FLASK ###
+__pycache__
+migrations
+
+
+
+### ENVIRONMENT ###
+env
