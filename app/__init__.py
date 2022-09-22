@@ -18,6 +18,8 @@ def create_app():
     migrate.init_app(app, db)
 
     from app.main.routes import main
+    from app.errors.handlers import errors
     app.register_blueprint(main)
+    app.register_blueprint(errors)
 
     return app
