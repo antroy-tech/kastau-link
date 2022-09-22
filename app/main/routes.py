@@ -60,5 +60,4 @@ def url_redirect(short_id):
         return redirect(url_for('main.index'))
 
 
-# TODO: Rapihkan Alert Messages pada Tampilan Mobile
-# TODO: Buat Fitur Dark/Light Mode menggunakan Toggle
+# TODO: Buat Halaman Handling Error
