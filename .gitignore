@@ -6,3 +6,5 @@ migrations
 
 ### ENVIRONMENT ###
 env
+.env
+.flaskenv

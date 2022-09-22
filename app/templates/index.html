@@ -16,21 +16,21 @@
                 </div>
                 <form method="post">
                     <div class="flex flex-col items-center w-full mb-4 md:flex-row md:px-16">
-                        <div class="{% for messages in get_flashed_messages() %}mt-7{% endfor %} mr-2 w-full">
+                        <div class="mr-2 w-full">
                             <input placeholder="Enter your long URL here.. " type="text" name="url"
                                 value=""
-                                class="flex-grow w-full h-12 px-4 mb-3transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none md:mr-2 md:mb-0 focus:border-indigo-700 focus:outline-none focus:shadow-outline" />
+                                class="flex-grow w-full h-12 px-4 mb-3 ml-1 md:ml-0 md:mb-0 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-indigo-700 focus:outline-none focus:shadow-outline" />
                             <!-- Handling Flash Messages -->
                             {% with messages = get_flashed_messages(with_categories=true) %}
                             {% if messages %}
                                 {% for category, message in messages %}
-                                    <p class="mt-2 text-left text-sm text-{{ category }}-600 dark:text-{{ category }}-500">{{ message }}</p>
+                                    <p class="md:mt-2 text-left text-sm text-{{ category }}-600 dark:text-{{ category }}-500">{{ message }}</p>
                                 {% endfor %}
                             {% endif %}
                             {% endwith %}
                         </div>
                         <button type="submit"
-                            class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-indigo-700 hover:bg-indigo-400 focus:shadow-outline focus:outline-none">
+                            class="inline-flex items-center justify-center w-full h-12 px-6 {% for messages in get_flashed_messages() %}md:-mt-7{% endfor %} font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-indigo-700 hover:bg-indigo-400 focus:shadow-outline focus:outline-none">
                             Shorten!
                         </button>
                     </div>
