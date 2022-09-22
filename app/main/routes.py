@@ -14,12 +14,12 @@ def index():
         short_id = request.form['custom_id']
 
         if short_id and ShortUrls.query.filter_by(short_id=short_id).first() is not None:
-            flash('Silahkan gunakan custom name yang lain')
-            return redirect(url_for('index'))
+            flash('Silahkan gunakan custom name yang lain', 'red')
+            return redirect(url_for('main.index'))
 
         if not url:
-            flash('URL wajib dilengkapi!')
-            return redirect(url_for('index'))
+            flash('URL wajib dilengkapi!', 'red')
+            return redirect(url_for('main.index'))
         
         if not short_id:
             short_id = generate_short_id(5)
@@ -28,7 +28,6 @@ def index():
         db.session.add(new_link)
         db.session.commit()
         short_url = request.host_url + short_id
-        flash(f'{short_url}')
         return redirect(url_for('main.url_details', short_id=short_id))
     return render_template('index.html', page=page)
 
@@ -45,7 +44,7 @@ def url_details():
     if link:
         return render_template('url_details.html', page=page, link=link)
     else:
-        flash('URL tidak Valid!')
+        flash('URL tidak Valid!', 'red')
         return redirect(url_for('main.index'))
         
 @main.route('/<short_id>')
@@ -57,9 +56,9 @@ def url_redirect(short_id):
         db.session.commit()
         return redirect(original_url)
     else:
-        flash('URL tidak Valid!')
+        flash('URL tidak Valid!', 'red')
         return redirect(url_for('main.index'))
 
 
-# TODO: Buat Alert untuk setiap Flash
+# TODO: Rapihkan Alert Messages pada Tampilan Mobile
 # TODO: Buat Fitur Dark/Light Mode menggunakan Toggle
