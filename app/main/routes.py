@@ -1,6 +1,7 @@
 from app import db
 from flask import render_template, request, flash, redirect, url_for, Blueprint
-from app.models import ShortUrls
+from flask_login import login_required, current_user
+from app.models import Url
 from app.main.utils import generate_short_id
 
 main = Blueprint('main', __name__)
@@ -13,7 +14,7 @@ def index():
         url = request.form['url']
         short_id = request.form['custom_id']
 
-        if short_id and ShortUrls.query.filter_by(short_id=short_id).first() is not None:
+        if short_id and Url.query.filter_by(short_id=short_id).first() is not None:
             flash('Silahkan gunakan custom name yang lain', 'red')
             return redirect(url_for('main.index'))
 
@@ -24,7 +25,11 @@ def index():
         if not short_id:
             short_id = generate_short_id(5)
         
-        new_link = ShortUrls(original_url=url, short_id=short_id)
+        if not current_user.is_anonymous:
+            new_link = Url(original_url=url, short_id=short_id, user_id=current_user.id)
+        else: 
+            new_link = Url(original_url=url, short_id=short_id)
+            
         db.session.add(new_link)
         db.session.commit()
         short_url = request.host_url + short_id
@@ -40,7 +45,7 @@ def index():
 def url_details():
     page = 'Info URL'
     short_id = request.args['short_id']
-    link = ShortUrls.query.filter_by(short_id=short_id).first()
+    link = Url.query.filter_by(short_id=short_id).first()
     if link:
         return render_template('url_details.html', page=page, link=link)
     else:
@@ -49,7 +54,7 @@ def url_details():
         
 @main.route('/<short_id>')
 def url_redirect(short_id):
-    link = ShortUrls.query.filter_by(short_id=short_id).first()
+    link = Url.query.filter_by(short_id=short_id).first()
     if link:
         original_url = link.original_url
         link.clicks = link.clicks+1
