@@ -1,6 +1,7 @@
 ### FLASK ###
 __pycache__
 migrations
+*sqlite
 
 
 
