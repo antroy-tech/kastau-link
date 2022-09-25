@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+<section class="dark:bg-gray-800 min-h-screen">
+    <div class="py-16 flex flex-wrap justify-center">
+            <div class="grid md:grid-cols-3 gap-6">
+
+                {% for url in urls %}
+                <div class="p-1 border-2 border-gray-300 hover:border-dashed rounded-2xl">
+                    <div class="flex">
+                        <a class="inline-block text-center px-12 py-3 w-full text-sm font-medium text-gray-800 border border-gray-200 rounded-t-xl hover:bg-gray-100 hover:text-black active:bg-dark-600 focus:outline-none focus:ring dark:bg-gray-100 dark:hover:bg-gray-500 dark:hover:text-white"
+                            href="">
+                            Edit link
+                        </a>
+                    </div>
+                    <a class="block p-6 bg-white sm:p-8 rounded-b-xl"
+                        href="{{ url_for ('main.url_details', short_id=url.short_id) }}">
+                        <div class=" sm:pr-8">
+                            <h5 class="text-xl font-bold text-gray-900">kastau.link/{{ url.short_id }}</h5>
+
+                            <p class="mt-2 text-sm text-gray-500">
+                                Link: <span class="text-indigo-600">{{ url.original_url.rpartition("//")[-1].partition("/")[0] }}</span>
+                            </p>
+                            <p class="mt-2 text-sm text-gray-500">
+                                Created: {{ url.create_at.strftime('%A %H:%M %p') }}
+                            </p>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+
+            </div>
+    </div>
+</section>
+{% endblock content %}

@@ -31,4 +31,4 @@ class Url(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
 
     def __repr__(self):
-        return self.short_id
+        return f'Url: {self.id} - {self.short_id}'

@@ -1,8 +1,8 @@
 import os, json
 from urllib import request
 from app import db, oauth
-from app.models import User
-from flask import flash, redirect, url_for, Blueprint
+from app.models import Url, User
+from flask import render_template, flash, redirect, url_for, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
 
 users = Blueprint('users', __name__)
@@ -52,3 +52,12 @@ def oauth_callback():
 def logout():
     logout_user()
     return redirect(url_for('main.index'))
+
+
+@users.route('/dashboard')
+def dashboard():
+    page = "Dashboard"
+
+    urls = Url.query.filter_by(user_id=current_user.id)
+
+    return render_template('dashboard.html', page=page, urls=urls)

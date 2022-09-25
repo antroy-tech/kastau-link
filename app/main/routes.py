@@ -65,4 +65,3 @@ def url_redirect(short_id):
         return redirect(url_for('main.index'))
 
 
-# TODO: Buat Halaman Handling Error
