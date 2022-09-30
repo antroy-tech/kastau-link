@@ -8,7 +8,6 @@ DATABASE_URI = os.getenv("DATABASE_URL")
 if DATABASE_URI.startswith("postgres://"):
     DATABASE_URI = DATABASE_URI.replace("postgres://", "postgresql://", 1)
 
-
 class Config:
     SECRET_KEY = os.getenv('SECRET_KEY', default='014145ea5815464ebca08240f2b8bbc6')
     SQLALCHEMY_DATABASE_URI = DATABASE_URI

@@ -55,6 +55,7 @@ def logout():
 
 
 @users.route('/dashboard')
+@login_required
 def dashboard():
     page = "Dashboard"
 

@@ -9,3 +9,4 @@ migrations
 env
 .env
 .flaskenv
+deploy-idc
