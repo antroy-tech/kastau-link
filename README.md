@@ -8,13 +8,13 @@
 
 ## Installation
 
-- Create virtual environment
+1. Create virtual environment
 
 	```
 	python -m venv env
 	```
 
-- Activate virtual environment
+2. Activate virtual environment
 
 	Linux:
 	```
@@ -26,15 +26,15 @@
 	\env\Scripts\activate
 	```
 
-- Install the requirements
+3. Install the requirements
 	
 	```
 	pip install -r requirements.txt
 	```
 
-- Run the project
+4. Run the project
 
-	1. Copy the .env.example into .env
+	- Copy the .env.example into .env
 	
 		*Note: Default Database for this Project with SQLite*
 
@@ -48,7 +48,7 @@
 		CONF_URL=https://accounts.google.com/.well-known/openid-configuration
 		```
 
-	2. Database Migrations
+	- Database Migrations
 
 		- Initiate Database
 			```
@@ -63,7 +63,7 @@
 			flask db upgrade
 			```
 
-	3. Run the project
+	- Run the project
 
 		```
 		flask run
