@@ -35,10 +35,12 @@
 - Run the project
 
 	1. Copy the .env.example into .env
+	
+		*Note: Default Database for this Project with SQLite*
 
 		```
 		SECRET_KEY=your_secret_key
-		DATABASE_URL=your_db_access_url
+		DATABASE_URL=sqlite:///shorturl.sqlite
 		APP_SETTINGS=config.DevelopmentConfig
 		FLASK_APP=app
 		GOOGLE_CLIENT_ID=your_google_client_id
@@ -46,7 +48,22 @@
 		CONF_URL=https://accounts.google.com/.well-known/openid-configuration
 		```
 
-	2. Run the program
+	2. Database Migrations
+
+		- Initiate Database
+			```
+			flask db init
+			``` 
+		- Migrate Database
+			```
+			flask db migrate
+			```
+		- Apply Migration
+			```
+			flask db upgrade
+			```
+
+	3. Run the project
 
 		```
 		flask run
