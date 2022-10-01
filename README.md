@@ -34,7 +34,7 @@
 
 4. Run the project
 
-	- Copy the .env.example into .env
+	- **Copy the .env.example into .env**
 	
 		*Note: Default Database for this Project with SQLite*
 
@@ -48,7 +48,7 @@
 		CONF_URL=https://accounts.google.com/.well-known/openid-configuration
 		```
 
-	- Database Migrations
+	- **Database Migrations**
 
 		- Initiate Database
 			```
@@ -63,7 +63,7 @@
 			flask db upgrade
 			```
 
-	- Run the project
+	- **Run the project**
 
 		```
 		flask run
