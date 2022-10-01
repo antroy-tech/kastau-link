@@ -1,6 +1,6 @@
 ## Kastau Link
 
-**Kastau Link** is an Open Source project for make shorten urls. Made with Tailwind CSS and Flask.
+**Kastau Link** is a Open Source project for make shorten urls. Made with Tailwind CSS and Flask.
 
 ![GitHub](https://img.shields.io/github/license/antheiz/kastau-link)
 ![GitHub Repo stars](https://img.shields.io/github/stars/antheiz/kastau-link?style=flat-square)
