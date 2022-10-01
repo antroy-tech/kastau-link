@@ -80,7 +80,7 @@ The code is open for learning purpose, feel free to deploy to your own domain.
 
 ## Author
 
-KastauLink is created by <a href="https://antheiz.me">Theis Andatu</a>.
+Kastau Link is created by <a href="https://antheiz.me">Theis Andatu</a>.
 
 
 ## License
