@@ -4,7 +4,8 @@ migrations
 *sqlite
 *db
 
-
+### Tailwind CSS ###
+node_modules
 
 ### ENVIRONMENT ###
 env
