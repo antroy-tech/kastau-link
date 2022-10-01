@@ -37,13 +37,10 @@ def index():
     return render_template('index.html', page=page)
 
 
-# @main.route('/info/<short_id>')
-# def url_details(short_id):
-#     return render_template('url_details.html')
-
 @main.route('/info')
 def url_details():
     page = 'Info URL'
+
     short_id = request.args['short_id']
     link = Url.query.filter_by(short_id=short_id).first()
     if link:
@@ -51,7 +48,31 @@ def url_details():
     else:
         flash('URL tidak Valid!', 'red')
         return redirect(url_for('main.index'))
-        
+
+
+@main.route('/update/<short_id>', methods=['GET','POST'])
+@login_required
+def url_update(short_id):
+    page = "Update URL"
+
+    link = Url.query.filter_by(short_id=short_id).first()
+    if link in current_user.urls:
+        if request.method == 'POST':
+            url = request.form['url']
+            if not url:
+                flash('URL wajib dilengkapi!', 'red')
+                return redirect(url_for('main.url_update', short_id=short_id))
+
+            link.original_url = url
+            db.session.commit()
+            return redirect(url_for('main.url_details', short_id=short_id))
+
+        return render_template('url_update.html', page=page, link=link)
+    else:
+        flash('Anda tidak memiliki akses!', 'red')
+        return redirect(url_for('main.index'))
+
+
 @main.route('/<short_id>')
 def url_redirect(short_id):
     link = Url.query.filter_by(short_id=short_id).first()

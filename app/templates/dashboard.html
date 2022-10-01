@@ -10,7 +10,7 @@
                 <div class="p-1 border-2 border-gray-300 hover:border-dashed rounded-2xl">
                     <div class="flex">
                         <a class="inline-block text-center px-12 py-3 w-full text-sm font-medium text-gray-800 border border-gray-200 rounded-t-xl hover:bg-gray-100 hover:text-black active:bg-dark-600 focus:outline-none focus:ring dark:bg-gray-100 dark:hover:bg-gray-500 dark:hover:text-white"
-                            href="">
+                            href="{{ url_for ('main.url_update', short_id=url.short_id) }}">
                             Edit link
                         </a>
                     </div>
@@ -28,6 +28,28 @@
                         </div>
                     </a>
                 </div>
+                {% else %}
+                <div></div>
+                <section>
+                    <div class="container flex flex-col items-center px-4 py-12 mx-auto text-center">
+                        <h2 class="text-3xl font-semibold tracking-tight text-gray-700 sm:text-4xl dark:text-white">
+                            Belum ada shorten link yang <br> yang dibuat.
+                        </h2>
+                
+                        <div class="mt-6 sm:-mx-2">
+                            <div class="inline-flex w-full sm:w-auto sm:mx-2">
+                                <a href="{{ url_for ('main.index') }}" class="inline-flex items-center justify-center w-full px-5 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                    </svg>                                                                          
+                                      
+                                    Buat sekarang
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div></div>
                 {% endfor %}
 
             </div>
