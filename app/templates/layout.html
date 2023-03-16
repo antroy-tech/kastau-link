@@ -1,107 +1,135 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="dark">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for ('static', filename='icon/apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for ('static', filename='icon/favicon-16x16.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for ('static', filename='icon/favicon-32x32.png') }}">
-    <link rel="manifest" href="{{ url_for ('static', filename='icon/site.webmanifest') }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="{{ url_for ('static', filename='icon/apple-touch-icon.png') }}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="{{ url_for ('static', filename='icon/favicon-16x16.png') }}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="{{ url_for ('static', filename='icon/favicon-32x32.png') }}"
+    />
+    <link
+      rel="manifest"
+      href="{{ url_for ('static', filename='icon/site.webmanifest') }}"
+    />
 
     <title>{{page.capitalize()}} • Kastau Link</title>
 
     <meta property="og:locale" content="id_ID" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Kastau Link" />
-    <meta property="og:description" content=" Bantu bikin link website yang panjang menjadi lebih singkat dan mudah diingat. " />
+    <meta
+      property="og:description"
+      content=" Bantu bikin link website yang panjang menjadi lebih singkat dan mudah diingat. "
+    />
     <meta property="og:url" content="https://kastau.link/" />
     <meta property="og:site_name" content="Kastau Link" />
-    <meta property="og:image" content="https://kastau.link/static/img/logo.png" />
+    <meta
+      property="og:image"
+      content="https://kastau.link/static/img/logo.png"
+    />
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-</head>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/output.css') }}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body class="font-poppins ">
-
+  <body class="font-poppins">
     <!-- NAVBAR -->
     {% include 'snippets/navbar.html' %}
 
-
     <!-- Content -->
-    {% block content %}
-
-    {% endblock content %}
-
+    {% block content %} {% endblock content %}
 
     <!-- Footer -->
     {% include 'snippets/footer.html' %}
 
-
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.3.0/alpine-ie11.js"
-        integrity="sha512-6m6AtgVSg7JzStQBuIpqoVuGPVSAK5Sp/ti6ySu6AjRDa1pX8mIl1TwP9QmKXU+4Mhq/73SzOk6mbNvyj9MPzQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.3.0/alpine-ie11.js"
+      integrity="sha512-6m6AtgVSg7JzStQBuIpqoVuGPVSAK5Sp/ti6ySu6AjRDa1pX8mIl1TwP9QmKXU+4Mhq/73SzOk6mbNvyj9MPzQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script>
-        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
+      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+      if (
+        localStorage.getItem("color-theme") === "dark" ||
+        (!("color-theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+
+      var themeToggleDarkIcon = document.getElementById(
+        "theme-toggle-dark-icon"
+      );
+      var themeToggleLightIcon = document.getElementById(
+        "theme-toggle-light-icon"
+      );
+
+      // Change the icons inside the button based on previous settings
+      if (
+        localStorage.getItem("color-theme") === "dark" ||
+        (!("color-theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        themeToggleLightIcon.classList.remove("hidden");
+      } else {
+        themeToggleDarkIcon.classList.remove("hidden");
+      }
+
+      var themeToggleBtn = document.getElementById("theme-toggle");
+
+      themeToggleBtn.addEventListener("click", function () {
+        // toggle icons inside button
+        themeToggleDarkIcon.classList.toggle("hidden");
+        themeToggleLightIcon.classList.toggle("hidden");
+
+        // if set via local storage previously
+        if (localStorage.getItem("color-theme")) {
+          if (localStorage.getItem("color-theme") === "light") {
+            document.documentElement.classList.add("dark");
+            localStorage.setItem("color-theme", "dark");
+          } else {
+            document.documentElement.classList.remove("dark");
+            localStorage.setItem("color-theme", "light");
+          }
+
+          // if NOT set via local storage previously
         } else {
-            document.documentElement.classList.remove('dark')
+          if (document.documentElement.classList.contains("dark")) {
+            document.documentElement.classList.remove("dark");
+            localStorage.setItem("color-theme", "light");
+          } else {
+            document.documentElement.classList.add("dark");
+            localStorage.setItem("color-theme", "dark");
+          }
         }
-
-        var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-        var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
-
-        // Change the icons inside the button based on previous settings
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            themeToggleLightIcon.classList.remove('hidden');
-        } else {
-            themeToggleDarkIcon.classList.remove('hidden');
-        }
-
-        var themeToggleBtn = document.getElementById('theme-toggle');
-
-        themeToggleBtn.addEventListener('click', function () {
-
-            // toggle icons inside button
-            themeToggleDarkIcon.classList.toggle('hidden');
-            themeToggleLightIcon.classList.toggle('hidden');
-
-            // if set via local storage previously
-            if (localStorage.getItem('color-theme')) {
-                if (localStorage.getItem('color-theme') === 'light') {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('color-theme', 'dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('color-theme', 'light');
-                }
-
-                // if NOT set via local storage previously
-            } else {
-                if (document.documentElement.classList.contains('dark')) {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('color-theme', 'light');
-                } else {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('color-theme', 'dark');
-                }
-            }
-
-        });
-
+      });
     </script>
 
     <!-- Custom Script -->
-    {% block scripts %}
-
-    {% endblock scripts %}
-
-</body>
-
+    {% block scripts %} {% endblock scripts %}
+  </body>
 </html>
