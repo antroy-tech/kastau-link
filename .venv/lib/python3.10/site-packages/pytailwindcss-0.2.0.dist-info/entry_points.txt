@@ -1,0 +1,4 @@
+[console_scripts]
+tailwindcss=pytailwindcss.__main__:main
+tailwindcss_install=pytailwindcss.__main__:install
+
