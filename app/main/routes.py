@@ -32,9 +32,6 @@ def index():
         else:
             new_link = Url(original_url=url, short_id=short_id)
 
-        # video = segno.make("https://www.youtube.com/channel/UCNhFxpk6hGt5uMCKXq0Jl8A")
-        # video.save("Video.png", scale=8)
-
         db.session.add(new_link)
         db.session.commit()
         return redirect(url_for("main.url_details", short_id=short_id))
@@ -90,3 +87,4 @@ def url_redirect(short_id):
     else:
         flash("URL tidak Valid!", "red")
         return redirect(url_for("main.index"))
+

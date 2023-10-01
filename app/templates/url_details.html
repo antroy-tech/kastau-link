@@ -1,18 +1,11 @@
 {% extends 'layout.html' %} {% block content %}
 <section class="dark:bg-gray-800 min-h-screen">
-  <div
-    class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-16"
-  >
+  <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-16">
     <div class="max-w-2xl mx-auto sm:max-w-xl md:max-w-2xl">
       <div class="text-center">
-        <div
-          class="max-w-xl -mt-12 mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-8"
-        >
-          <img
-            src="{{ url_for ('static', filename='img/logo.png') }}"
-            class="-mb-10 mx-auto w-36 md:w-1/3"
-            alt="Logo Kastau Link"
-          />
+        <div class="max-w-xl -mt-12 mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-8">
+          <img src="{{ url_for ('static', filename='img/logo.png') }}" class="-mb-10 mx-auto w-36 md:w-1/3"
+            alt="Logo Kastau Link" />
 
           <p class="mt-6 text-gray-500 dark:text-gray-300">
             Bantu bikin link website yang panjang menjadi lebih singkat <br />
@@ -21,68 +14,33 @@
         </div>
         <div class="flex flex-row justify-between md:flex-row md:mx-16">
           <p class="mb-2 text-xs font-normal text-gray-600 dark:text-gray-200">
-            Hits: {{ link.clicks }}
+            Diakses: {{ link.clicks }}
           </p>
           <p class="mb-2 text-xs font-normal text-gray-600 dark:text-gray-200">
-            Created on
-            <span class="font-semibold"
-              >{{ link.create_at.strftime('%A %H:%M') }}</span
-            >
+            Dibuat pada
+            <span class="font-semibold">{{ link.create_at|datetimeformat('EEEE, dd-MM-yyyy') }}</span>
           </p>
         </div>
-        <div
-          class="flex flex-col items-center w-full mb-4 md:flex-row md:px-16"
-        >
-          <input
-            type="text"
-            name="url"
-            id="short_url"
-            value="{{request.host_url+link.short_id }}"
-            readonly
-            class="flex-grow w-full h-12 px-4 mb-3 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none md:mr-2 md:mb-0 focus:border-indigo-700 focus:outline-none focus:shadow-outline"
-          />
+        <div class="flex flex-col items-center w-full mb-4 md:flex-row md:px-16">
+          <input type="text" name="url" id="short_url" value="{{request.host_url+link.short_id }}" readonly
+            class="flex-grow w-full h-12 px-4 mb-3 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none md:mr-2 md:mb-0 focus:border-indigo-700 focus:outline-none focus:shadow-outline" />
           <div class="inline-flex">
-            <a
-              onclick="copy_text()"
-              class="inline-block rounded border border-indigo-700 bg-indigo-700 p-3 mr-0.5 text-white hover:bg-indigo-400 focus:outline-none focus:ring active:text-indigo-500"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-6 h-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                />
+            <a onclick="copy_text()"
+              class="inline-block rounded border border-indigo-700 bg-indigo-700 p-3 mr-0.5 text-white hover:bg-indigo-400 focus:outline-none focus:ring active:text-indigo-500">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
               </svg>
             </a>
-            <a
-              href="#modal"
-              class="inline-block rounded border border-indigo-700 bg-indigo-700 p-3 text-white hover:bg-indigo-400 focus:outline-none focus:ring active:text-indigo-500"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 h-6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5z"
-                />
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M6.75 6.75h.75v.75h-.75v-.75zM6.75 16.5h.75v.75h-.75v-.75zM16.5 6.75h.75v.75h-.75v-.75zM13.5 13.5h.75v.75h-.75v-.75zM13.5 19.5h.75v.75h-.75v-.75zM19.5 13.5h.75v.75h-.75v-.75zM19.5 19.5h.75v.75h-.75v-.75zM16.5 16.5h.75v.75h-.75v-.75z"
-                />
+            <a href="#modal"
+              class="inline-block rounded border border-indigo-700 bg-indigo-700 p-3 text-white hover:bg-indigo-400 focus:outline-none focus:ring active:text-indigo-500">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5z" />
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M6.75 6.75h.75v.75h-.75v-.75zM6.75 16.5h.75v.75h-.75v-.75zM16.5 6.75h.75v.75h-.75v-.75zM13.5 13.5h.75v.75h-.75v-.75zM13.5 19.5h.75v.75h-.75v-.75zM19.5 13.5h.75v.75h-.75v-.75zM19.5 19.5h.75v.75h-.75v-.75zM16.5 16.5h.75v.75h-.75v-.75z" />
               </svg>
             </a>
           </div>
@@ -92,20 +50,13 @@
           <hr />
           <br />
         </div>
-        <div
-          class="flex flex-col gap-2 md:flex-row md:justify-evenly md:mx-32 md:my-7"
-        >
-          <a
-            class="inline-block px-6 py-2 text-sm font-medium text-white bg-indigo-500 border border-indigo-600 rounded active:text-indigo-500 hover:bg-indigo-700 hover:text-white focus:outline-none focus:ring"
-            href="{{ link.original_url }}"
-            target="_blank"
-          >
+        <div class="flex flex-col gap-2 md:flex-row md:justify-evenly md:mx-32 md:my-7">
+          <a class="inline-block px-6 py-2 text-sm font-medium text-white bg-indigo-500 border border-indigo-600 rounded active:text-indigo-500 hover:bg-indigo-700 hover:text-white focus:outline-none focus:ring"
+            href="{{ link.original_url }}" target="_blank">
             Menuju link Asli
           </a>
-          <a
-            class="inline-block px-6 py-2 text-sm font-medium text-white bg-indigo-700 border border-indigo-600 rounded active:text-indigo-500 hover:bg-indigo-600 hover:text-white focus:outline-none focus:ring"
-            href="{{ url_for('main.index') }}"
-          >
+          <a class="inline-block px-6 py-2 text-sm font-medium text-white bg-indigo-700 border border-indigo-600 rounded active:text-indigo-500 hover:bg-indigo-600 hover:text-white focus:outline-none focus:ring"
+            href="{{ url_for('main.index') }}">
             Kembali ke home
           </a>
         </div>
@@ -115,52 +66,30 @@
 </section>
 
 <!-- Modal for QRCode Generate -->
-<div
-  class="group invisible relative z-10 opacity-0 transition-all duration-300 target:visible target:opacity-100"
-  aria-labelledby="modal-title"
-  role="dialog"
-  aria-modal="true"
-  id="modal"
->
+<div class="group invisible relative z-10 opacity-0 transition-all duration-300 target:visible target:opacity-100"
+  aria-labelledby="modal-title" role="dialog" aria-modal="true" id="modal">
   <div class="fixed inset-0 z-10">
-    <div
-      class="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0"
-    >
-      <a
-        href="#"
-        target="_self"
-        class="fixed inset-0 block cursor-default bg-black/50 bg-opacity-75 transition-opacity"
-        ><span class="sr-only">Close Modal</span></a
-      >
+    <div class="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
+      <a href="#" target="_self"
+        class="fixed inset-0 block cursor-default bg-black/50 bg-opacity-75 transition-opacity"><span
+          class="sr-only">Close Modal</span></a>
 
       <div
-        class="relative inline-block p-4 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl sm:max-w-sm rounded-xl dark:bg-gray-900 sm:my-8 sm:w-full sm:p-6"
-      >
-        <div
-          class="flex items-center justify-center mx-auto border-b dark:border-b-0"
-        >
-          <img
-            class="h-full rounded-lg"
-            src="{{ qrcode.png_data_uri(scale=8) }}"
-            alt=""
-          />
+        class="relative inline-block p-4 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl sm:max-w-sm rounded-xl dark:bg-gray-900 sm:my-8 sm:w-full sm:p-6">
+        <div class="flex items-center justify-center mx-auto border-b dark:border-b-0">
+          <img class="h-full rounded-lg" src="{{ qrcode.png_data_uri(scale=8) }}" alt="" />
 
           <!-- {{ qrcode.svg_inline(scale=8) | safe }} -->
         </div>
 
         <div class="mt-5 sm:items-center sm:justify-between sm:mt-6 sm:-mx-2">
-          <a
-            href="#"
-            class="px-4 sm:mx-2 w-full py-2.5 mr-1.5 text-sm font-medium dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800 tracking-wide text-gray-700 capitalize transition-colors duration-300 transform border border-gray-200 rounded-md hover:bg-gray-100 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-40"
-          >
+          <a href="#"
+            class="px-4 sm:mx-2 w-full py-2.5 mr-1.5 text-sm font-medium dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800 tracking-wide text-gray-700 capitalize transition-colors duration-300 transform border border-gray-200 rounded-md hover:bg-gray-100 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-40">
             Close
           </a>
 
-          <a
-            href="{{ qrcode.png_data_uri(scale=8) }}"
-            download="{{link.short_id}}"
-            class="px-4 sm:mx-2 w-full py-2.5 mt-3 sm:mt-0 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
-          >
+          <a href="{{ qrcode.png_data_uri(scale=8) }}" download="{{link.short_id}}"
+            class="px-4 sm:mx-2 w-full py-2.5 mt-3 sm:mt-0 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40">
             Save QR Image
           </a>
         </div>
