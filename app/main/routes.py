@@ -88,3 +88,14 @@ def url_redirect(short_id):
         flash("URL tidak Valid!", "red")
         return redirect(url_for("main.index"))
 
+
+@main.route("/kebijakan-privasi")
+def kebijakan_privasi():
+    page = "Kebijakan Privasi"
+    return render_template("kebijakan_privasi.html", page=page)
+
+
+@main.route("/ketentuan-layanan")
+def ketentuan_layanan():
+    page = "Ketentuan Layanan"
+    return render_template("ketentuan_layanan.html", page=page)
