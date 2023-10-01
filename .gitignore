@@ -10,5 +10,7 @@ node_modules
 ### ENVIRONMENT ###
 env
 .env
+venv
+.venv
 .flaskenv
 deploy-idc
