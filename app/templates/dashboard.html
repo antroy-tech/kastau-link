@@ -1,35 +1,38 @@
 {% extends 'layout.html' %} {% block content %}
-<section class="dark:bg-gray-800 min-h-screen">
+<section class="dark:bg-neutral-800 min-h-screen">
   <div class="py-16 flex flex-wrap justify-center">
     <div class="grid md:grid-cols-3 gap-6">
       {% for url in urls %}
-      <div class="p-1 border-2 border-gray-300 hover:border-dashed rounded-2xl">
+      <div class="p-1 border-2 border-gray-300 dark:border-neutral-500 hover:border-dashed rounded-2xl">
         <div class="flex">
-          <a
-            class="inline-block text-center px-12 py-3 w-full text-sm font-medium text-gray-800 border border-gray-200 rounded-t-xl hover:bg-gray-100 hover:text-black active:bg-dark-600 focus:outline-none focus:ring dark:bg-gray-100 dark:hover:bg-gray-500 dark:hover:text-white"
-            href="{{ url_for ('main.url_update', short_id=url.short_id) }}"
-          >
-            Edit link
+          <a class="inline-block text-center px-12 py-3 w-full text-sm font-medium text-gray-800 border border-gray-200 rounded-t-xl hover:bg-gray-100 hover:text-black active:bg-dark-600 focus:outline-none focus:ring dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-white"
+            href="{{ url_for ('main.url_update', short_id=url.short_id) }}">
+            Edit Tautan
           </a>
         </div>
-        <a
-          class="block p-6 bg-white sm:p-8 rounded-b-xl"
-          href="{{ url_for ('main.url_details', short_id=url.short_id) }}"
-        >
-          <div class="sm:pr-8">
-            <h5 class="text-xl font-bold text-gray-900">
-              kastau.link/{{ url.short_id }}
-            </h5>
+        <a class="block p-6 bg-white dark:bg-neutral-800 sm:p-8 rounded-b-xl"
+          href="{{ url_for ('main.url_details', short_id=url.short_id) }}">
+          <div class="sm:pr-8 text-sm text-gray-500 dark:text-white">
+            <div class="inline-flex">
+              <svg xmlns="http://www.w3.org/2000/svg" class="text-indigo-600 w-6 h-6" viewBox="0 0 24 24">
+                <path fill="currentColor"
+                  d="M17 20v-3h-3v-2h3v-3h2v3h3v2h-3v3h-2Zm-6-3H7q-2.075 0-3.538-1.463T2 12q0-2.075 1.463-3.538T7 7h4v2H7q-1.25 0-2.125.875T4 12q0 1.25.875 2.125T7 15h4v2Zm-3-4v-2h8v2H8Zm14-1h-2q0-1.25-.875-2.125T17 9h-4V7h4q2.075 0 3.538 1.463T22 12Z" />
+              </svg>
+              <h5 class="px-3 text-xl font-bold text-neutral-900 dark:text-white">
+                <span>kastau.link/{{ url.short_id }}</span>
+              </h5>
+            </div>
 
-            <p class="mt-2 text-sm text-gray-500">
-              Link:
-              <span class="text-indigo-600"
-                >{{ url.original_url.rpartition("//")[-1].partition("/")[0]
-                }}</span
-              >
+            <p class="mt-2">
+              URL:
+              <span class="text-indigo-600">{{ url.original_url.rpartition("//")[-1].partition("/")[0]
+                }}</span>
             </p>
-            <p class="mt-2 text-sm text-gray-500">
-              Created: {{ url.create_at.strftime('%A %H:%M') }}
+            <p class="mt-2">
+              Dibuat: {{ url.create_at|datetimeformat('EEEE, dd-MM-yyyy') }}
+            </p>
+            <p class="mt-2 ">
+              Jumlah diakses: {{ url.clicks }}
             </p>
           </div>
         </a>
@@ -37,35 +40,19 @@
       {% else %}
       <div></div>
       <section>
-        <div
-          class="container flex flex-col items-center px-4 py-12 mx-auto text-center"
-        >
-          <h2
-            class="text-3xl font-semibold tracking-tight text-gray-700 sm:text-4xl dark:text-white"
-          >
+        <div class="container flex flex-col items-center px-4 py-12 mx-auto text-center">
+          <h2 class="text-3xl font-semibold tracking-tight text-gray-700 sm:text-4xl dark:text-white">
             Belum ada shorten link yang <br />
             yang dibuat.
           </h2>
 
           <div class="mt-6 sm:-mx-2">
             <div class="inline-flex w-full sm:w-auto sm:mx-2">
-              <a
-                href="{{ url_for ('main.index') }}"
-                class="inline-flex items-center justify-center w-full px-5 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-6 h-6 mr-2"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M12 4.5v15m7.5-7.5h-15"
-                  />
+              <a href="{{ url_for ('main.index') }}"
+                class="inline-flex items-center justify-center w-full px-5 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" class="w-6 h-6 mr-2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                 </svg>
 
                 Buat sekarang

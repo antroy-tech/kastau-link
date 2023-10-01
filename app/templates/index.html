@@ -2,29 +2,30 @@
 
 
 {% block content %}
-<section class="dark:bg-gray-800 min-h-screen">
+<section class="dark:bg-neutral-800 min-h-screen">
     <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-16">
         <div class="max-w-2xl mx-auto sm:max-w-xl md:max-w-2xl">
             <div class="text-center">
                 <div class="max-w-xl mt-22 mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-8">
-                    <img src="{{ url_for ('static', filename='img/logo.png') }}" class="-mb-10 mx-auto w-36 md:w-1/3" alt="Logo Kastau Link">
+                    <img src="{{ url_for ('static', filename='img/logo.png') }}" class="-mb-10 mx-auto w-36 md:w-1/3"
+                        alt="Logo Kastau Link">
 
-                    <p class="mt-6 md:mt-0 text-gray-500 dark:text-gray-300">
-                        Bantu bikin link website yang panjang menjadi lebih singkat <br> dan mudah diingat.
+                    <p class="mt-6 md:mt-0 text-neutral-500 dark:text-neutral-100">
+                        Bantu bikin link yang panjang menjadi lebih singkat <br> dan mudah diingat.
                     </p>
                 </div>
                 <form method="post">
                     <div class="flex flex-col items-center w-full mb-4 md:flex-row md:px-16">
                         <div class="mr-2 w-full">
-                            <input placeholder="Masukan link yang panjang disini... " type="url" name="url"
-                                value=""
-                                class="flex-grow w-full h-12 px-4 mb-3 ml-1 md:ml-0 md:mb-0 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-indigo-700 focus:outline-none focus:shadow-outline" />
+                            <input placeholder="Masukan link yang panjang disini... " type="url" name="url" value=""
+                                class="flex-grow w-full h-12 px-4 mb-3 ml-1 md:ml-0 md:mb-0 transition duration-200 bg-white border border-neutral-300 rounded shadow-sm appearance-none focus:border-indigo-700 focus:outline-none focus:shadow-outline" />
                             <!-- Handling Flash Messages -->
                             {% with messages = get_flashed_messages(with_categories=true) %}
                             {% if messages %}
-                                {% for category, message in messages %}
-                                    <p class="md:mt-2 text-left text-sm text-{{ category }}-600 dark:text-{{ category }}-500">{{ message }}</p>
-                                {% endfor %}
+                            {% for category, message in messages %}
+                            <p class="md:mt-2 text-left text-sm text-{{ category }}-600 dark:text-{{ category }}-500">{{
+                                message }}</p>
+                            {% endfor %}
                             {% endif %}
                             {% endwith %}
                         </div>
@@ -36,26 +37,28 @@
                     <div class="flex flex-col md:flex-row md:justify-around" x-data="{ open: false }">
 
 
-                        <div class="flex md:-ml-2 w-60 h-9" x-show="open" @click.outside="open = open" x-cloak :class="[open ? 'mt-2' : 'pt-0']">
+                        <div class="flex md:-ml-2 w-60 h-9" x-show="open" @click.outside="open = open" x-cloak
+                            :class="[open ? 'mt-2' : 'pt-0']">
                             <span
-                                class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                class="inline-flex items-center px-3 text-sm text-neutral-900 bg-neutral-200 rounded-l-md border border-r-0 border-neutral-300 dark:bg-neutral-600 dark:text-neutral-400 dark:border-neutral-600">
                                 kastau.link/
                             </span>
                             <input type="text" id="website-admin" name="custom_id"
-                                class="rounded-none rounded-r-lg bg-gray-50 border  text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                class="rounded-none rounded-r-lg bg-neutral-50 border  text-neutral-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-neutral-300 p-2.5  dark:bg-neutral-700 dark:border-neutral-600 dark:placeholder-neutral-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="antroy-tech">
                         </div>
-                        
-                        <span class="text-gray-500 text-left md:text-right" @click="open = ! open" x-cloak :class="[open ? 'pt-4 md:pt-2' : 'pt-2 md:ml-80']">
+
+                        <span class="text-neutral-500 dark:text-neutral-100 text-left md:text-right"
+                            @click="open = ! open" x-cloak :class="[open ? 'pt-4 md:pt-2' : 'pt-2 md:ml-80']">
                             Gunakan
-                            <a class="mt-1 text-base text-gray-500 dark:text-gray-300 hover:underline cursor-pointer"><span
-                                class="text-indigo-600">custom link</span></a>
+                            <a
+                                class="mt-1 text-base text-neutral-500 dark:text-neutral-300 hover:underline cursor-pointer"><span
+                                    class="text-indigo-600">custom link</span></a>
                         </span>
-                    </div>                
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 </section>
 {% endblock content %}
-    
