@@ -23,7 +23,7 @@ pycparser==2.21
 pytailwindcss==0.2.0
 python-dotenv==0.21.0
 pytz==2023.3.post1
-requests==2.28.1
+requests==2.31.0
 segno==1.5.2
 SQLAlchemy==1.4.41
 urllib3==1.26.12
